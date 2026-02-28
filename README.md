@@ -1,36 +1,139 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🛒 Admin E-Commerce Dashboard
 
-## Getting Started
+A full-stack e-commerce admin dashboard built with **Next.js 14**, **TypeScript**, **Prisma ORM**, **PostgreSQL**, and **Tailwind CSS**. Includes a customer-facing storefront and a complete admin panel — all in a single monorepo using the Next.js App Router.
 
-First, run the development server:
+---
+
+## 🚀 Tech Stack
+
+| Tech                                          | Purpose                                 |
+| --------------------------------------------- | --------------------------------------- |
+| [Next.js 14](https://nextjs.org/)             | Full-stack React framework (App Router) |
+| [TypeScript](https://www.typescriptlang.org/) | Type safety                             |
+| [Prisma ORM](https://www.prisma.io/)          | Database access & migrations            |
+| [PostgreSQL](https://www.postgresql.org/)     | Relational database                     |
+| [Tailwind CSS](https://tailwindcss.com/)      | Utility-first styling                   |
+| [NextAuth.js](https://next-auth.js.org/)      | Authentication                          |
+
+---
+
+## ✨ Features
+
+### Admin Panel
+
+- 📦 Product management (create, edit, delete)
+- 🗂️ Category management
+- 👥 User management
+- 📊 Admin dashboard overview
+
+### Customer Storefront
+
+- 🛍️ Browse products and collections
+- 🔍 Product detail pages
+- 🛒 Shopping cart
+- 💳 Checkout flow
+- 🔐 Sign up / Sign in
+
+---
+
+## 📁 Project Structure
+
+```
+src/
+├── app/
+│   ├── (customer)/
+│   │   ├── (with-header)/       # Pages with navigation header
+│   │   │   ├── products/
+│   │   │   ├── product/[slug]/
+│   │   │   └── collections/
+│   │   └── (without-header)/    # Pages without header
+│   │       ├── cart/
+│   │       └── checkout/
+│   ├── admin/                   # Admin panel
+│   │   ├── products/
+│   │   ├── categories/
+│   │   └── users/
+│   ├── api/                     # API routes
+│   └── auth/                    # Auth pages
+├── components/
+├── lib/
+├── store/
+└── types/
+```
+
+---
+
+## 🛠️ Getting Started
+
+### Prerequisites
+
+- Node.js 18+
+- PostgreSQL database
+- npm or yarn
+
+### Installation
+
+1. **Clone the repository**
+
+```bash
+git clone https://github.com/YOUR_USERNAME/admin-ecommerce-dashboard.git
+cd admin-ecommerce-dashboard
+```
+
+2. **Install dependencies**
+
+```bash
+npm install
+```
+
+3. **Set up environment variables**
+
+Create a `.env` file in the root directory:
+
+```env
+DATABASE_URL="postgresql://USER:PASSWORD@localhost:5432/your_db_name"
+NEXTAUTH_SECRET="your-secret-key"
+NEXTAUTH_URL="http://localhost:3000"
+```
+
+4. **Run Prisma migrations**
+
+```bash
+npx prisma migrate dev
+npx prisma generate
+```
+
+5. **Start the development server**
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📜 Scripts
 
-## Learn More
+```bash
+npm run dev       # Start development server
+npm run build     # Build for production
+npm run start     # Start production server
+npm run lint      # Run ESLint
+```
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🗄️ Database
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+This project uses **Prisma** with **PostgreSQL**. To view and manage your data visually:
 
-## Deploy on Vercel
+```bash
+npx prisma studio
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
