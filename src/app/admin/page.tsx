@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import { ReactNode } from "react";
 import prisma from "@/lib/prisma";
+import CurrentDate from "@/components/admin/CurrentDate";
 
 export default async function AdminDashboardPage() {
   const productCount = await prisma.product.count();
@@ -46,16 +47,10 @@ export default async function AdminDashboardPage() {
           <h1 className="text-3xl  tracking-tight">Dashboard</h1>
         </div>
         <p className="text-sm text-muted-foreground hidden md:block">
-          {new Date().toLocaleDateString("en-PK", {
-            weekday: "long",
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })}
+          <CurrentDate />
         </p>
       </div>
 
-      {/* Stat Cards */}
       <div className="grid grid-cols-2 xl:grid-cols-4 gap-4">
         <StatCard
           title="Total Sales"
