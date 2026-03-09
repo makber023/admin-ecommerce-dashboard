@@ -55,6 +55,8 @@ src/
 │   │   └── users/
 │   ├── api/                     # API routes
 │   └── auth/                    # Auth pages
+│   │   ├── signin/
+│   │   └── signup/
 ├── components/
 ├── lib/
 ├── store/
@@ -76,7 +78,7 @@ src/
 1. **Clone the repository**
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/admin-ecommerce-dashboard.git
+git clone https://github.com/makber023/admin-ecommerce-dashboard.git
 cd admin-ecommerce-dashboard
 ```
 
