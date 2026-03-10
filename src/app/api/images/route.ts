@@ -1,4 +1,3 @@
-// app/api/images/route.ts
 import { readdir } from "fs/promises";
 import path from "path";
 

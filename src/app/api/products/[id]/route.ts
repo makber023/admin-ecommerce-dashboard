@@ -14,14 +14,14 @@ const productUpdateSchema = z.object({
 
 export async function GET(
   req: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
     const { id } = await params;
     if (!id) {
       return NextResponse.json(
         { error: "Product ID is required" },
-        { status: 400 }
+        { status: 400 },
       );
     }
     const product = await prisma.product.findUnique({
@@ -36,21 +36,21 @@ export async function GET(
     console.error("GET PRODUCT BY ID ERROR:", error);
     return NextResponse.json(
       { error: "Failed to fetch product" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
 
 export async function DELETE(
   req: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
     const { id } = await params;
     if (!id) {
       return NextResponse.json(
         { error: "Product ID is required" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -63,14 +63,14 @@ export async function DELETE(
     console.error("PRODUCT DELETE ERROR:", error);
     return NextResponse.json(
       { error: "Failed to delete product" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
 
 export async function PUT(
   req: Request,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
     const { id } = await params;
@@ -78,7 +78,7 @@ export async function PUT(
     if (isNaN(productId)) {
       return NextResponse.json(
         { error: "Invalid product ID" },
-        { status: 400 }
+        { status: 400 },
       );
     }
     const data = productUpdateSchema.parse(await req.json());
@@ -89,7 +89,7 @@ export async function PUT(
       if (!categoryExists) {
         return NextResponse.json(
           { error: "Category does not exist" },
-          { status: 400 }
+          { status: 400 },
         );
       }
     }
@@ -110,7 +110,7 @@ export async function PUT(
 
     return NextResponse.json(
       { error: "Failed to update product" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
