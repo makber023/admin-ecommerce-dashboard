@@ -7,7 +7,11 @@ interface Params {
   slug: string;
 }
 
-export default async function CollectionPage({ params }: { params: Params }) {
+export default async function CollectionPage({
+  params,
+}: {
+  params: Promise<Params>;
+}) {
   const { slug } = await params;
 
   const category = await prisma.category.findUnique({
