@@ -4,6 +4,19 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import bcrypt from "bcryptjs";
 
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+  CardAction,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+
 export default function SignUpPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -18,7 +31,6 @@ export default function SignUpPage() {
     setError("");
 
     try {
-      // Hash the password before sending
       const hashedPassword = await bcrypt.hash(password, 10);
 
       const res = await fetch("/api/auth/signup", {
@@ -42,49 +54,74 @@ export default function SignUpPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <form
-        onSubmit={handleSubmit}
-        className="w-80 p-6 bg-white rounded shadow-md"
-      >
-        <h1 className="text-2xl font-bold mb-4">Sign Up</h1>
-        {error && <p className="text-red-500 mb-2">{error}</p>}
-        <input
-          type="text"
-          placeholder="Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          className="w-full p-2 mb-3 border rounded"
-        />
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="w-full p-2 mb-3 border rounded"
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="w-full p-2 mb-3 border rounded"
-        />
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full bg-green-600 text-white p-2 rounded mb-2"
-        >
-          {loading ? "Creating account..." : "Sign Up"}
-        </button>
-        <button
-          type="button"
-          onClick={() => router.push("/auth/signin")}
-          className="w-full bg-gray-500 text-white p-2 rounded"
-        >
-          Go Back to Sign In
-        </button>
-      </form>
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 font-mono">
+      <Card className="w-full max-w-sm">
+        <CardHeader>
+          <CardTitle>Create an account</CardTitle>
+          <CardDescription>
+            Enter your details below to create your account
+          </CardDescription>
+          <CardAction>
+            <Button variant="link">
+              <a href="/auth/signin">Sign In</a>
+            </Button>
+          </CardAction>
+        </CardHeader>
+        <CardContent className="flex flex-col gap-4">
+          <form onSubmit={handleSubmit} id="signup-form">
+            {error && <p className="text-sm text-red-500">{error}</p>}
+            <div className="flex flex-col gap-6">
+              <div className="grid gap-2">
+                <Label htmlFor="name">Name</Label>
+                <Input
+                  id="name"
+                  type="text"
+                  placeholder="John Doe"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="email">Email</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="you@example.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="password">Password</Label>
+                <Input
+                  id="password"
+                  type="password"
+                  placeholder="••••••••"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+            </div>
+          </form>
+        </CardContent>
+        <CardFooter className="flex-col gap-2">
+          <Button
+            type="submit"
+            form="signup-form"
+            className="w-full"
+            disabled={loading}
+          >
+            {loading ? "Creating account..." : "Sign Up"}
+          </Button>
+          <Button
+            variant="outline"
+            className="w-full"
+            onClick={() => router.push("/auth/signin")}
+          >
+            Back to Sign In
+          </Button>
+        </CardFooter>
+      </Card>
     </div>
   );
 }
